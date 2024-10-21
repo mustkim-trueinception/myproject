@@ -1,14 +1,27 @@
 import express from 'express';
-
-const host = process.env.HOST ?? 'localhost';
-const port = process.env.PORT ? Number(process.env.PORT) : 3000;
+import mongoose from 'mongoose';
+import { UserModel } from './models/userModel'; // adjust to your library path
 
 const app = express();
+const port = 3000;
 
-app.get('/', (req, res) => {
-  res.send({ message: 'Hello API' });
+// Middleware
+app.use(express.json());
+
+// MongoDB Connection
+mongoose
+  .connect('mongodb://localhost:27017/mydatabase')
+  .then(() => console.log('MongoDB connected'))
+  .catch((err) => console.error('MongoDB connection error:', err));
+
+// Example Route to Create a User
+app.post('/users', async (req, res) => {
+  const { username, email, password } = req.body;
+  const user = new UserModel({ username, email, password });
+  await user.save();
+  res.status(201).send(user);
 });
 
-app.listen(port, host, () => {
-  console.log(`[ ready ] http://${host}:${port}`);
+app.listen(port, () => {
+  console.log(`Server is running at http://localhost:${port}`);
 });
