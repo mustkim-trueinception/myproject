@@ -1,6 +1,7 @@
+import { UserModel } from '@models'; // This will trigger the eslint error
+
 import express from 'express';
 import mongoose from 'mongoose';
-import { UserModel } from './models/userModel'; // adjust to your library path
 
 const app = express();
 const port = 3000;
