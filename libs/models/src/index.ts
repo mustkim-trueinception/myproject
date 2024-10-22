@@ -1,2 +1,2 @@
-export * from './lib/userModel';
-// Add other model exports here
+export * from './lib/models';
+export * from './lib/user';

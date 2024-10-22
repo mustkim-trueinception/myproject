@@ -1,4 +1,4 @@
-import { UserModel } from '@models'; // This will trigger the eslint error
+import { UserModel } from '@model'; // This will trigger the eslint error
 
 import express from 'express';
 import mongoose from 'mongoose';
